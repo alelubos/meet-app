@@ -63,7 +63,7 @@ module.exports.getAuthURL = async () => {
   The second step in the OAuth process is to get the access token. For it, we need to use the
   code from the first function: getAuthURL(). This code comes in the form of a URI Parameter
 */
-module.exports.getAccessToken = (event) => {
+module.exports.getAccessToken = async (event) => {
   // For each request we need to create a new OAuth Client and return a Promise
   const oAuth2Client = new google.auth.OAuth2(
     client_id,
@@ -109,7 +109,7 @@ module.exports.getAccessToken = (event) => {
     });
 };
 
-module.exports.getCalendarEvents = (event) => {
+module.exports.getCalendarEvents = async (event) => {
   // For each request we need to create a new OAuth Client and return a Promise
   const oAuth2Client = new google.auth.OAuth2(
     client_id,
