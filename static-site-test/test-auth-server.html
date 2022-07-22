@@ -87,10 +87,10 @@
         const getTokenRequest = getToken + '/' + code;
         fetch(getTokenRequest)
           .then(function (response) {
-            return response.json;
+            return response.json();
           })
           .then(function (json) {
-            accessTokenElement.innerText = JSON.stringify(json);
+            accessTokenElement.innerText = JSON.stringify(json.token);
           });
       };
       // ---------------- END of STEP 2
@@ -104,6 +104,7 @@
       getEvents.onclick = function () {
         const { access_token } = JSON.parse(accessTokenElement.innerText);
         const eventRequest = getCalendarEvents + '/' + access_token;
+
         fetch(eventRequest)
           .then(function (response) {
             return response.json();
