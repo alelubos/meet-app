@@ -18,7 +18,7 @@ describe('<CitySearch/> Component', () => {
     expect(CitySearchWrapper.find('.city')).toHaveLength(1);
   });
   // Test that input field receives query as prop value
-  test('render text input value correctly from state (query)', () => {
+  test('render text input value correctly from state "query"', () => {
     const query = CitySearchWrapper.state('query');
     expect(CitySearchWrapper.find('.city').prop('value')).toBe(query);
   });
