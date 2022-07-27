@@ -12,7 +12,7 @@ class Event extends Component {
   render() {
     const { event } = this.props;
     return (
-      <div>
+      <div class="event">
         <h1 className="title">{event.summary}</h1>
         <p className="date-time">{event.start.dateTime}</p>
         <span className="location">{event.location}</span>
@@ -27,7 +27,8 @@ class Event extends Component {
             <p className="description">{event.description}</p>
           </div>
         )}
-        <button className="toggle-details" onClick={this.handleToggleDetails}>
+        <br /> <br />
+        <button className="details-button" onClick={this.handleToggleDetails}>
           {this.state.isCollapsed ? 'show details' : 'hide details'}
         </button>
       </div>

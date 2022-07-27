@@ -23,9 +23,10 @@ describe('<NumberOfEvents /> Component', () => {
     );
   });
   test('input value should be iniatially that of state "eventsToDisplay" (32)', () => {
-    let eventsToDisplay =
-      NumberOfEventsWrapper.state('eventsToDisplay').toString();
-    expect(NumberOfEventsWrapper.find('.number').text()).toBe(eventsToDisplay);
+    let eventsToDisplay = NumberOfEventsWrapper.state('eventsToDisplay');
+    expect(NumberOfEventsWrapper.find('.number').prop('value')).toBe(
+      eventsToDisplay
+    );
   });
 
   // Test that state "eventsToDisplay" is updated with user's input

@@ -25,8 +25,8 @@ describe('<Event /> Component', () => {
   test('render Event with a location', () => {
     expect(EventWrapper.find('.location')).toHaveLength(1);
   });
-  test('render Event with "toggle-details" button', () => {
-    expect(EventWrapper.find('.toggle-details')).toHaveLength(1);
+  test('render Event with "details-button" button', () => {
+    expect(EventWrapper.find('.details-button')).toHaveLength(1);
   });
 
   // Test necessary elements render with correct values
@@ -40,12 +40,12 @@ describe('<Event /> Component', () => {
     expect(EventWrapper.find('.location').text()).toBe(event.location);
   });
   test('render Event with button with correct text', () => {
-    expect(EventWrapper.find('.toggle-details').text()).toBe('show details');
+    expect(EventWrapper.find('.details-button').text()).toBe('show details');
   });
 
   // Test functionality when button "show details" is clicked
   test('when button "show details" is clicked details pane is displayed', () => {
-    EventWrapper.find('.toggle-details').simulate('click');
+    EventWrapper.find('.details-button').simulate('click');
     expect(EventWrapper.state('isCollapsed')).toBe(false);
     expect(EventWrapper.exists('.details')).toBe(true);
   });
@@ -85,12 +85,12 @@ describe('<Event /> Component displaying "details"', () => {
     expect(EventWrapper.find('.description').text()).toBe(event.description);
   });
   test('button has "hide details" text', () => {
-    expect(EventWrapper.find('.toggle-details').text()).toBe('hide details');
+    expect(EventWrapper.find('.details-button').text()).toBe('hide details');
   });
 
   // Test button functionality
   test('when clicking on button "hide details" the details pane is collapsed', () => {
-    EventWrapper.find('.toggle-details').simulate('click');
+    EventWrapper.find('.details-button').simulate('click');
     expect(EventWrapper.state('isCollapsed')).toBe(true);
     expect(EventWrapper.exists('.details')).toBe(false);
   });

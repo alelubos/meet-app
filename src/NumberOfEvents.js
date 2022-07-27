@@ -4,21 +4,22 @@ class NumberOfEvents extends Component {
   state = {
     eventsToDisplay: 32,
   };
+
   handleNumberChanged = (event) => {
     this.setState({ eventsToDisplay: event.target.value });
   };
+
   render() {
     return (
-      <div>
+      <div className="numberOfEvents">
         <label for="number">Number of Events:</label>
         <input
-          type="number"
+          type="text"
           name="number"
           className="number"
+          value={this.state.eventsToDisplay}
           onChange={this.handleNumberChanged}
-        >
-          {this.state.eventsToDisplay}
-        </input>
+        />
       </div>
     );
   }
