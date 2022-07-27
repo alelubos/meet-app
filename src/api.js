@@ -91,8 +91,8 @@ const getToken = async (code) => {
 };
 
 export const extractLocations = (events) => {
-  var extractLocations = events.map((event) => event.location);
+  let allLocations = events.map((event) => event.location);
   // We create a new array with all duplicates removed (Set)
-  var locations = [...new Set(extractLocations)];
-  return locations;
+  let uniqueLocations = [...new Set(allLocations)];
+  return uniqueLocations;
 };

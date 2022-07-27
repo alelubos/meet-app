@@ -65,7 +65,11 @@ module.exports.getAuthURL = async () => {
 */
 module.exports.getAccessToken = async (event) => {
   // For each request we need to create a new OAuth Client and return a Promise
-  const oAuth2Client = new OAuth2(client_id, client_secret, redirect_uris[0]);
+  const oAuth2Client = new google.auth.OAuth2(
+    client_id,
+    client_secret,
+    redirect_uris[0]
+  );
   // Decode authorization code embedded in the URL query parameters
   const code = decodeURIComponent(`${event.pathParameters.code}`);
 
@@ -74,9 +78,9 @@ module.exports.getAccessToken = async (event) => {
       Exchange authorization code for access token with a "callback" after the exchange. 
       The callback in this case is an arrow function with the results as parameters: "err" and "token". 
     */
-    oAuth2Client.getToken(code, (err, token) => {
-      if (err) {
-        return reject(err);
+    oAuth2Client.getToken(code, (error, token) => {
+      if (error) {
+        return reject(error);
       }
       return resolve(token);
     });
@@ -89,12 +93,12 @@ module.exports.getAccessToken = async (event) => {
           // 'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
         },
-        body: JSON.stringify({ token }),
+        body: JSON.stringify(token),
       };
     })
     .catch((err) => {
       // Handle error
-      console.err(err);
+      console.error(err);
       return {
         statusCode: 500,
         headers: {
