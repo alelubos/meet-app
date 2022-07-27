@@ -46,7 +46,11 @@ class CitySearch extends Component {
               {suggestion}
             </li>
           ))}
-          <li key="all" onClick={() => this.handleItemClicked('all')}>
+          <li
+            key="all"
+            onClick={() => this.handleItemClicked('all')}
+            style={{ fontWeight: '800' }}
+          >
             See all Cities
           </li>
         </ul>
