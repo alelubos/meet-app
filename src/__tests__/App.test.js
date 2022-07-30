@@ -27,6 +27,7 @@ describe('<App/> Component', () => {
 
 // INTEGRATION TESTS
 describe('<App /> Integration', () => {
+  // check PROPS passed to children components
   test('App passes "events" state as a prop to EventList', () => {
     const AppWrapper = mount(<App />);
     const AppEventsState = AppWrapper.state('events');
@@ -34,7 +35,6 @@ describe('<App /> Integration', () => {
     expect(AppWrapper.find(EventList).props().events).toEqual(AppEventsState);
     AppWrapper.unmount();
   });
-
   test('App passes "locations" state as a prop to CitySearch', () => {
     const AppWrapper = mount(<App />);
     const AppLocationsState = AppWrapper.state('locations');
@@ -45,6 +45,7 @@ describe('<App /> Integration', () => {
     AppWrapper.unmount();
   });
 
+  // COMPONENTS Integration
   test('get list of events matching the city selected by the user', async () => {
     const AppWrapper = mount(<App />);
     const CitySearchWrapper = AppWrapper.find(CitySearch);
@@ -69,6 +70,22 @@ describe('<App /> Integration', () => {
     await suggestionItems.at(lastIndex).simulate('click');
     const allEvents = await getEvents();
     expect(AppWrapper.state('events')).toEqual(allEvents);
+    AppWrapper.unmount();
+  });
+
+  test('changing NumberOfEvents eventsCount state should restrict events displayed in EventList and update numberOfEvents state in App', async () => {
+    const AppWrapper = mount(<App />);
+    const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
+    const EventListWrapper = AppWrapper.find(EventList);
+    const newNumberOfEvents = Math.ceil(Math.random() * 32);
+    await NumberOfEventsWrapper.find('.number').simulate('input', {
+      target: { value: newNumberOfEvents },
+    });
+    const eventsCount = NumberOfEventsWrapper.state('eventsCount');
+    expect(AppWrapper.state('numberOfEvents')).toBe(eventsCount);
+    expect(EventListWrapper.find(Event).length).not.toBeGreaterThan(
+      eventsCount
+    );
     AppWrapper.unmount();
   });
 });

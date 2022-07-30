@@ -25,8 +25,10 @@ class CitySearch extends Component {
   render() {
     return (
       <div className="CitySearch">
+        <label for="city">Search Events by City:</label>
         <input
           type="text"
+          name="city"
           className="city"
           value={this.state.query}
           onChange={this.handleInputChanged}
