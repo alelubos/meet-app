@@ -6,7 +6,7 @@ import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { getEvents, extractLocations } from './api';
 
-class App extends Component {
+export default class App extends Component {
   state = {
     events: [],
     locations: [],
@@ -69,5 +69,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;
