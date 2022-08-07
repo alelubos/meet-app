@@ -7,22 +7,18 @@ import NumberOfEvents from './NumberOfEvents';
 import { getEvents, extractLocations } from './api';
 import { InfoAlert } from './Alert';
 
-window.addEventListener('online', this.handleConnectionStatus);
-window.addEventListener('offline', this.handleConnectionStatus);
-
 export default class App extends Component {
   state = {
     events: [],
     locations: [],
     numberOfEvents: 32,
     selectedLocation: 'all',
-    connectionStatusText: '',
   };
 
   handleConnectionStatus = () => {
     let text = navigator.onLine
       ? ''
-      : 'Currently Offline: the displayed list is based on cached data';
+      : 'No connection: the displayed list is based on cached data';
     this.setState({ connectionStatusText: text });
   };
 
@@ -57,14 +53,18 @@ export default class App extends Component {
         });
       }
     });
-    // window.addEventListener('online', this.handleConnectionStatus);
-    // window.addEventListener('offline', this.handleConnectionStatus);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('online', this.handleConnectionStatus);
+      window.addEventListener('offline', this.handleConnectionStatus);
+    }
   }
 
   componentWillUnmount() {
     this.mounted = false;
-    window.removeEventListener('online', this.handleConnectionStatus);
-    window.removeEventListener('offline', this.handleConnectionStatus);
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('online', this.handleConnectionStatus);
+      window.removeEventListener('offline', this.handleConnectionStatus);
+    }
   }
 
   render() {
