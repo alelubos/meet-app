@@ -5,6 +5,10 @@ import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { getEvents, extractLocations } from './api';
+import { InfoAlert } from './Alert';
+
+window.addEventListener('online', this.handleConnectionStatus);
+window.addEventListener('offline', this.handleConnectionStatus);
 
 export default class App extends Component {
   state = {
@@ -12,6 +16,14 @@ export default class App extends Component {
     locations: [],
     numberOfEvents: 32,
     selectedLocation: 'all',
+    connectionStatusText: '',
+  };
+
+  handleConnectionStatus = () => {
+    let text = navigator.onLine
+      ? ''
+      : 'Currently Offline: the displayed list is based on cached data';
+    this.setState({ connectionStatusText: text });
   };
 
   updateEvents = (
@@ -40,15 +52,19 @@ export default class App extends Component {
     getEvents().then((events) => {
       if (this.mounted) {
         this.setState({
-          events: events.slice(0, this.state.eventCount),
+          events,
           locations: extractLocations(events),
         });
       }
     });
+    // window.addEventListener('online', this.handleConnectionStatus);
+    // window.addEventListener('offline', this.handleConnectionStatus);
   }
 
   componentWillUnmount() {
     this.mounted = false;
+    window.removeEventListener('online', this.handleConnectionStatus);
+    window.removeEventListener('offline', this.handleConnectionStatus);
   }
 
   render() {
@@ -60,6 +76,7 @@ export default class App extends Component {
         />
         <div className="container">
           <NumberOfEvents updateEvents={this.updateEvents} />
+          <InfoAlert text={this.state.connectionStatusText} />
           <EventList
             events={this.state.events.slice(0, this.state.numberOfEvents)}
             eventCount={this.state.eventCount}
