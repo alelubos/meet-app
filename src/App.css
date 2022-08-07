@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  padding: 2% 5%;
+  padding: 25px 5%;
 }
 
 .App * {
@@ -69,7 +69,7 @@ input[type='number'] {
   display: flex;
   flex-direction: column;
   flex-basis: 300px;
-  max-width: 300px;
+  max-width: 330px;
   margin: auto;
   position: relative;
 }
@@ -89,7 +89,7 @@ input[type='number'] {
   z-index: 2;
   align-self: center;
   margin: 0;
-  top: 63px;
+  top: 102px;
   font-size: 14px;
   border-radius: 1rem;
   box-shadow: 7px 8px 15px -5px hsla(0, 0%, 0%, 0.4);
@@ -145,7 +145,7 @@ input[type='number'] {
 }
 
 .link {
-  color: hsl(219, 74%, 56%);
+  color: blue;
   font-weight: 500;
 }
 
