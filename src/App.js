@@ -27,8 +27,9 @@ export default class App extends Component {
 
   getData = () => {
     const { locations, events } = this.state;
+    const displayedEvents = events.slice(0, this.state.numberOfEvents);
     let data = locations.map((location) => {
-      const number = events.filter(
+      const number = displayedEvents.filter(
         (event) => event.location === location
       ).length;
       const city = location.split(', ')[0].split(' -')[0];
@@ -115,7 +116,12 @@ export default class App extends Component {
                   name="events"
                   allowDecimals={false}
                 />
-                <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                <Tooltip
+                  cursor={{
+                    strokeDasharray: '3 3',
+                    stroke: 'hsl(22, 54%, 28%)',
+                  }}
+                />
                 <Scatter
                   name="Events"
                   data={this.getData()}
@@ -124,7 +130,8 @@ export default class App extends Component {
               </ScatterChart>
             </ResponsiveContainer>
 
-            <EventsPerTopic events={events} />
+            <EventsPerTopic events={events.slice(0, numberOfEvents)} />
+            <br />
           </div>
           <InfoAlert text={this.state.connectionStatusText} />
           <EventList

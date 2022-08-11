@@ -7,7 +7,13 @@ const EventsPerTopic = ({ events }) => {
     setData(() => getData());
   }, [events]);
   const topics = ['React', 'JavaScript', 'Node', 'jQuery', 'Angular'];
-  const colors = ['#0b50d0', '#0f90c4', '#199c1a', '#786020', '#6e3d21'];
+  const colors = [
+    'hsl(219, 70%, 28%)',
+    'hsl(219, 90%, 43%)',
+    'hsl(116, 43%, 34%)',
+    'hsl(22, 74%, 43%)',
+    'hsl(22, 64%, 28%)',
+  ];
 
   const getData = () => {
     const summaries = events.map((event) => event.summary);
@@ -25,7 +31,7 @@ const EventsPerTopic = ({ events }) => {
       <h4 className="label">Topics distribution:</h4>
       <ResponsiveContainer height={280}>
         <PieChart>
-          <Legend verticalAlign="bottom" />
+          <Legend />
           <Pie
             data={data}
             cx="50%"
@@ -41,6 +47,8 @@ const EventsPerTopic = ({ events }) => {
           </Pie>
         </PieChart>
       </ResponsiveContainer>
+      <br />
+      <br />
     </>
   );
 };

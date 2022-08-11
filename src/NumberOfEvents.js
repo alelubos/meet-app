@@ -23,7 +23,7 @@ class NumberOfEvents extends Component {
     return (
       <div className="numberOfEvents">
         <ErrorAlert text={this.state.errorText} />
-        <label for="number">Events to display:</label>
+        <label for="number">Number of Events:</label>
         <br />
         <input
           type="number"
