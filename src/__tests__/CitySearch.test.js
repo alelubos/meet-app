@@ -13,6 +13,9 @@ describe('<CitySearch/> Component', () => {
       <CitySearch locations={locations} updateEvents={() => {}} />
     );
   });
+  afterAll(() => {
+    CitySearchWrapper.unmount();
+  });
 
   test('render text input (.city) that filters events by city', () => {
     expect(CitySearchWrapper.find('.city')).toHaveLength(1);
@@ -42,11 +45,11 @@ describe('<CitySearch/> Component', () => {
     expect(CitySearchWrapper.find('.suggestions')).toHaveLength(1);
   });
 
-  test('selecting a suggestion should update query state', () => {
-    CitySearchWrapper.setState({ query: 'Berlin' });
-    const suggestions = CitySearchWrapper.state('suggestions');
-    CitySearchWrapper.find('.suggestions li').at(0).simulate('click');
-    expect(CitySearchWrapper.state('query')).toBe(suggestions[0]);
+  test('selecting a suggestion should update query state', async () => {
+    CitySearchWrapper.setState({ suggestions: locations });
+    const firstSuggestion = CitySearchWrapper.state('suggestions').at(0);
+    await CitySearchWrapper.find('.suggestions li').at(0).simulate('click');
+    expect(CitySearchWrapper.state('query')).toBe(firstSuggestion);
   });
 
   test('selecting a suggestion should hide the suggestions list', () => {
