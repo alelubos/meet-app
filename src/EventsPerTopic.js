@@ -48,7 +48,6 @@ const EventsPerTopic = ({ events }) => {
         </PieChart>
       </ResponsiveContainer>
       <br />
-      <br />
     </>
   );
 };
